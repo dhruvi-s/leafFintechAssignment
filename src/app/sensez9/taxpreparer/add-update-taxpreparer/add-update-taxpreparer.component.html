@@ -1,0 +1,849 @@
+<div>
+    <div class="container-fluid">
+      <div>
+        <!------------DATE-------------->
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <button
+              mat-button
+              class="btn btn-success"
+              style="float: right; padding: 8px"
+            >
+              <i class="material-icons" style="font-size: 23px" (click)="prev()"
+                >navigate_before</i
+              >
+              <input
+                [hidden]="true"
+                matInput
+                [matDatepicker]="picker"
+                (dateInput)="addEvent('input', $event)"
+                [min]="minDate"
+                [max]="maxDate"
+                (dateChange)="addEvent('change', $event)"
+              />
+              <mat-datepicker touchUi #picker></mat-datepicker>
+  
+              <span (click)="picker.open()">
+                {{ today | date }}
+              </span>
+  
+              <i
+                class="material-icons"
+                *ngIf="this.isButtonVisible"
+                (click)="next()"
+                style="font-size: 23px"
+                >navigate_next</i
+              >
+            </button>
+          </div>
+        </div> -->
+  
+        <!-------------add------------------->
+
+        <div class="row" *ngIf="!isUpdate && !isApprove">
+          <div class="col-lg-12">
+            <div class="card">
+              <!-- <div class="card-body">  -->
+              <div>
+                <div class="card-header card-header-danger" style="padding: 10px">
+                  <h4 class="card-title">Add  Preparer</h4>
+                </div>
+  
+                <div class="row" style="margin: 0px">
+                  <div class="col-md-12">
+                    <form [formGroup]="taxAddForm">
+                      <!--Row one start-->
+                      <div class="row form-group">
+                        <div class="col-md-3 form-group">
+                          <mat-form-field appearance="standard">
+                            <mat-label>  Name </mat-label>
+                            <input
+                              type="text"
+                              matInput
+                              name="preparer_name"
+                              formControlName="preparer_name"
+                              placeholder=" Name"
+                            />
+                            <mat-error
+                              *ngIf="hasError('preparer_name', 'required')"
+                              > Name is required</mat-error
+                            >
+                          </mat-form-field>
+                        </div>
+                       
+                        <div class="col-md-3 form-group">
+                          <mat-form-field appearance="standard">
+                            <mat-label>Contact No.</mat-label>
+                            <input
+                              type="text"
+                              matInput
+                              name="preparer_contactno"
+                              formControlName="preparer_contactno"
+                              placeholder="Contact_no"
+                            />
+                            <mat-error *ngIf="hasError('preparer_contactno', 'required')"
+                              >Contact No is required</mat-error
+                            >
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                          <mat-form-field appearance="standard">
+                            <mat-label>ZipCode</mat-label>
+                            <input
+                              type="text"
+                              matInput
+                              name="preparer_zipcode"
+                              formControlName="preparer_zipcode"
+                              placeholder="Zip_code"
+                            />
+                            <mat-error
+                              *ngIf="hasError('preparer_zipcode', 'required')"
+                            >
+                            Zip_code is required</mat-error
+                            >
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                          <mat-form-field appearance="standard">
+                            <mat-label>Email</mat-label>
+                            <input
+                              type="text"
+                              matInput
+                              name="preparer_email"
+                              formControlName="preparer_email"
+                              placeholder="Email"
+                            />
+                            <mat-error
+                              *ngIf="hasError('preparer_email', 'required')"
+                            >
+                            Email is required</mat-error
+                            >
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--One end-->
+  
+                      <!---third row-->
+  
+                 
+
+                      <div class="row form-group">
+                      
+                        <!-- <div class="col-md-4 form-group"> -->
+                          <div class="col-md-3 form-group" style="bottom: 30px;">
+                          <mat-form-field appearance="standard">
+                            <mat-label> Site </mat-label>
+                            <mat-select  #select multiple  formControlName="sites">
+                              <div class="select-all">
+                                  <mat-checkbox [(ngModel)]="allSelected"
+                                                  [ngModelOptions]="{standalone: true}"
+                                                  (change)="toggleAllSelection()">Select All</mat-checkbox>
+                              </div>
+                              <mat-option (click)="optionClick()"    *ngFor="let ulist of allSitesResp"
+                              [value]="ulist.site_id"
+                            >
+                              {{ ulist.site_name }}
+                              </mat-option>
+                            </mat-select>
+                            <!-- <mat-select formControlName="sites" multiple>
+                              <div class="select-all">
+                                <mat-checkbox [(ngModel)]="allSelected"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="toggleAllSelection()">Select All</mat-checkbox>
+                            </div>
+                              <mat-option (click)="optionClick()"
+                                *ngFor="let ulist of allSitesResp"
+                                [value]="ulist.site_id"
+                              >
+                                {{ ulist.site_name }}
+                              </mat-option>
+                            </mat-select>  -->
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="spanish" name="spanish" [checked]="spanish"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Spanish</mat-label>
+                        </div>
+                        <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="international" name="international" [checked]="international"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>International</mat-label>
+                        </div>
+                        <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="military" name="military" [checked]="military"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Military</mat-label>
+                        </div>
+
+                     
+                      </div>
+
+                      <div class="row form-group">
+                        <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="document_drop_off" name="document_drop_off" [checked]="document_drop_off"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Document Drop Off</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group"  style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-select formControlName="document_drop_off_time"
+                          [ngModel]="defaultTime" [(value)]="defaultTime"
+                          placeholder="Select Slot" >
+                       <mat-option *ngFor="let time of allTime" [value]="time.value">
+                         {{time.viewValue}}
+                       </mat-option>
+                      </mat-select>
+                        </mat-form-field>
+                       </div>
+
+                       <div class="col-md-3  form-group" >
+                        <mat-checkbox  matInput class="example-margin" 
+                        formControlName="basic_in_person" name="basic_in_person" [checked]="basic_in_person"  
+                        style="color:#333333 !important;"></mat-checkbox>
+                        <span>&nbsp;</span><span>&nbsp;</span>        
+                        <mat-label>Basic In Person</mat-label>
+                      </div>
+                     <div class="col-md-3 form-group"  style="bottom: 30px;">
+                      <!-- <mat-form-field appearance="standard">
+                        <mat-label> Select </mat-label>
+                        <mat-select formControlName="site">
+                          <mat-option
+                            *ngFor="let ulist of allSitesResp"
+                            [value]="ulist.site_id"
+                          >
+                            {{ ulist.site_name }}
+                          </mat-option>
+                        </mat-select> 
+                      </mat-form-field> -->
+                      <mat-form-field appearance="standard">
+                        <mat-select formControlName="basic_in_person_time"
+                        [ngModel]="defaultBaiscTime" [(value)]="defaultBaiscTime"
+                        placeholder="Select Slot" >
+                     <mat-option *ngFor="let basictime of basicTime" [value]="basictime.value">
+                       {{basictime.viewValue}}
+                     </mat-option>
+                    </mat-select>
+                      </mat-form-field>
+                     </div>
+
+                      </div>
+
+                      <div class="row form-group">
+                        <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" 
+                          formControlName="advance_in_person" name="advance_in_person" [checked]="advance_in_person"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Advanced In Person</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group" style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-select formControlName="advance_in_person_time"
+                          [ngModel]="defaultAdvanceTime" [(value)]="defaultAdvanceTime"
+                          placeholder="Select Slot" >
+                       <mat-option *ngFor="let advancetime of advanceTime" [value]="advancetime.value">
+                         {{advancetime.viewValue}}
+                       </mat-option>
+                      </mat-select>
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="standard">
+                          <mat-label> Select </mat-label>
+                          <mat-select formControlName="site">
+                            <mat-option
+                              *ngFor="let ulist of allSitesResp"
+                              [value]="ulist.site_id"
+                            >
+                              {{ ulist.site_name }}
+                            </mat-option>
+                          </mat-select> 
+                        </mat-form-field> -->
+                       </div>
+
+                       <div class="col-md-3  form-group" >
+                        <mat-checkbox  matInput class="example-margin" 
+                        formControlName="return_visit" name="return_visit" [checked]="return_visit"  
+                        style="color:#333333 !important;"></mat-checkbox>
+                        <span>&nbsp;</span><span>&nbsp;</span>        
+                        <mat-label>Return Visit</mat-label>
+                      </div>
+                     <div class="col-md-3 form-group"  style="bottom: 30px;">
+                      <mat-form-field appearance="standard">
+                        <mat-select formControlName="return_visit_time"
+                        [ngModel]="defaultReturnTime" [(value)]="defaultReturnTime"
+                        placeholder="Select Slot" >
+                     <mat-option *ngFor="let returntime of returnTime" [value]="returntime.value">
+                       {{returntime.viewValue}}
+                     </mat-option>
+                    </mat-select>
+                      </mat-form-field>
+                      <!-- <mat-form-field appearance="standard">
+                        <mat-label> Select </mat-label>
+                        <mat-select formControlName="site">
+                          <mat-option
+                            *ngFor="let ulist of allSitesResp"
+                            [value]="ulist.site_id"
+                          >
+                            {{ ulist.site_name }}
+                          </mat-option>
+                        </mat-select> 
+                      </mat-form-field> -->
+                     </div>
+
+                      </div>
+  
+                      <!--Button start-->
+                      <div class="row" style="align-content: center">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3" style="display: grid">
+                          <button
+                            type="submit"
+                            class="btn btn-primary"
+                          
+  
+                            (click)="addTax()"
+                          >
+                            Submit For Approval
+                          </button>
+                        </div>
+                        <div class="col-md-3" style="display: grid">
+                          <button
+                          mat-button 
+                         
+                            class="btn btn-primary"
+                            (click)="back()"
+
+                            >
+                            Back
+                          </button>
+                        </div>
+                        <div class="col-md-3"></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      <!-------------update------------------->
+
+        <div class="row" *ngIf="isUpdate && !isApprove">
+            <div class="col-lg-12">
+              <div class="card">
+                <!-- <div class="card-body">  -->
+                <div>
+                  <div class="card-header card-header-danger" style="padding: 10px">
+                    <h4 class="card-title">Update /Edit Preparer Master Data</h4>
+                  </div>
+    
+                  <div class="row" style="margin: 0px">
+                    <div class="col-md-12">
+                      <form [formGroup]="taxEditForm">
+                        <!--Row one start-->
+                        <div class="row form-group">
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>  Name </mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_name"
+                                formControlName="preparer_name"
+                                placeholder=" Name"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_name', 'required')"
+                                > Name is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+                         
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>Contact No.</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_contactno"
+                                formControlName="preparer_contactno"
+                                placeholder="Contact_no"
+                              />
+                              <mat-error *ngIf="hasError('preparer_contactno', 'required')"
+                                >Contact No is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+  
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>ZipCode</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_zipcode"
+                                formControlName="preparer_zipcode"
+                                placeholder="Zip_code"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_zipcode', 'required')"
+                              >
+                              Zip_code is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+  
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>Email</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_email"
+                                formControlName="preparer_email"
+                                placeholder="Email"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_email', 'required')"
+                              >
+                              Email is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <!--One end-->
+    
+                        <!---third row-->
+
+                        <!-- <div class="row form-group">
+                          
+                          <div class="col-md-4 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label> Site </mat-label>
+                              <mat-select  #select multiple  formControlName="sites" multiple name="site" [ngModel]="site">
+                                <div class="select-all">
+                                    <mat-checkbox [(ngModel)]="allSelected"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="toggleAllSelection()">Select All</mat-checkbox>
+                                </div>
+                                <mat-option (click)="optionClick()"    *ngFor="let ulist of allSitesResp"
+                                [value]="ulist.site_name"
+                              >
+                                {{ ulist.site_name }}
+                                </mat-option>
+                              </mat-select>
+
+                            </mat-form-field>
+                          </div>
+                        </div> -->
+                        
+                        <div class="row form-group">
+                      
+                          <!-- <div class="col-md-4 form-group"> -->
+                            <div class="col-md-3 form-group" style="bottom: 30px;">
+                            <mat-form-field appearance="standard">
+                              <mat-label> Site </mat-label>
+                              <mat-select  #select multiple  formControlName="sites">
+                                <div class="select-all">
+                                    <mat-checkbox [(ngModel)]="allSelected"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="toggleAllSelection()">Select All</mat-checkbox>
+                                </div>
+                                <mat-option (click)="optionClick()"    *ngFor="let ulist of allSitesResp"
+                                [value]="ulist.site_id"
+                              >
+                                {{ ulist.site_name }}
+                                </mat-option>
+                              </mat-select>
+                              <!-- <mat-select formControlName="sites" multiple>
+                                <div class="select-all">
+                                  <mat-checkbox [(ngModel)]="allSelected"
+                                                  [ngModelOptions]="{standalone: true}"
+                                                  (change)="toggleAllSelection()">Select All</mat-checkbox>
+                              </div>
+                                <mat-option (click)="optionClick()"
+                                  *ngFor="let ulist of allSitesResp"
+                                  [value]="ulist.site_id"
+                                >
+                                  {{ ulist.site_name }}
+                                </mat-option>
+                              </mat-select>  -->
+                            </mat-form-field>
+                          </div>
+  
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="spanish" name="spanish" [checked]="spanish"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Spanish</mat-label>
+                          </div>
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="international" name="international" [checked]="international"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>International</mat-label>
+                          </div>
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="military" name="military" [checked]="military"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Military</mat-label>
+                          </div>
+  
+                       
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="document_drop_off" name="document_drop_off" [checked]="document_drop_off"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Document Dropp Off</mat-label>
+                          </div>
+                         <div class="col-md-3 form-group"  style="bottom: 30px;">
+                          <mat-form-field appearance="standard">
+                            <mat-label> Select </mat-label>
+                            <mat-select formControlName="document_drop_off_time" name="documentDropOffTime" [(ngModel)]="documentDropOffTime">
+                              <mat-option
+                                *ngFor="let list of allTime"
+                                [value]="list.value"
+                              >
+                                {{ list.viewValue }}
+                              </mat-option>
+                            </mat-select> 
+                          </mat-form-field>
+                         </div>
+  
+                         <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="basic_in_person" name="basic_in_person" [checked]="document_drop_off"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Basic In Person</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group"  style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-label> Select </mat-label>
+                          <mat-select formControlName="basic_in_person_time" name="basicInPersonTime" [(ngModel)]="basicInPersonTime">
+                            <mat-option
+                              *ngFor="let list of basicTime"
+                              [value]="list.value"
+                            >
+                              {{ list.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                       </div>
+  
+                        </div>
+  
+                        <div class="row form-group">
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="advance_in_person" name="advance_in_person" [checked]="document_drop_off"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Advanced In Person</mat-label>
+                          </div>
+                         <div class="col-md-3 form-group" style="bottom: 30px;">
+                          <mat-form-field appearance="standard">
+                            <mat-label> Select </mat-label>
+                            <mat-select formControlName="advance_in_person_time" name="advanceInPersonTime" [(ngModel)]="advanceInPersonTime">
+                              <mat-option
+                                *ngFor="let list of advanceTime"
+                                [value]="list.value"
+                              >
+                                {{ list.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                         </div>
+  
+                         <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="return_visit" name="return_visit" [checked]="document_drop_off"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Return Visit</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group"  style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-label> Select </mat-label>
+                          <mat-select formControlName="return_visit_time" name="returnVisitTime" [(ngModel)]="returnVisitTime">
+                            <mat-option
+                              *ngFor="let list of returnTime"
+                              [value]="list.value"
+                            >
+                              {{ list.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                       </div>
+  
+                        </div>
+                        
+                        <!--Button start-->
+                        <div class="row" style="align-content: center">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-4" style="display: grid">
+                            <button
+                              type="submit"
+                              class="btn btn-primary"
+                              [disabled]="!taxEditForm.valid"
+    
+                              (click)="updateTax()"
+                            >
+                              Update & Submit For Approval
+                            </button>
+                          </div>
+                          <div class="col-md-3" style="display: grid">
+                            <button
+                              class="btn btn-primary"
+                              mat-button
+                              (click)="back()"
+                            >
+                              Back
+                            </button>
+                          </div>
+                          <div class="col-md-3"></div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+       
+        <!-------------approve------------------->
+
+          <div class="row" *ngIf="!isUpdate && isApprove">
+            <div class="col-lg-12">
+              <div class="card">
+                <!-- <div class="card-body">  -->
+                <div>
+                  <div class="card-header card-header-danger" style="padding: 10px">
+                    <h4 class="card-title">Approve Preparer Master Data</h4>
+                  </div>
+    
+                  <div class="row" style="margin: 0px">
+                    <div class="col-md-12">
+                      <form [formGroup]="taxEditForm">
+                        <!--Row one start-->
+                        <div class="row form-group">
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>  Name </mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_name"
+                                formControlName="preparer_name"
+                                placeholder=" Name"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_name', 'required')"
+                                > Name is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+                         
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>Contact No.</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_contactno"
+                                formControlName="preparer_contactno"
+                                placeholder="Contact_no"
+                                [readonly]="true"
+                              />
+                              <mat-error *ngIf="hasError('preparer_contactno', 'required')"
+                                >Contact No is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+  
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>ZipCode</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_zipcode"
+                                formControlName="preparer_zipcode"
+                                placeholder="Zip_code"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_zipcode', 'required')"
+                              >
+                              Zip_code is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+  
+                          <div class="col-md-3 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label>Email</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                name="preparer_email"
+                                formControlName="preparer_email"
+                                placeholder="Email"
+                              />
+                              <mat-error
+                                *ngIf="hasError('preparer_email', 'required')"
+                              >
+                              Email is required</mat-error
+                              >
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <!--One end-->
+    
+                        <!---third row-->
+
+                        <div class="row form-group">
+                          <div class="col-md-4 form-group">
+                            <mat-form-field appearance="standard">
+                              <mat-label> Site </mat-label>
+                              <mat-select formControlName="sites" multiple name="site" [ngModel]="site">
+                                <mat-option
+                                  *ngFor="let ulist of allSitesResp"
+                                  [value]="ulist.site_id"
+                                >
+                                  {{ ulist.site_name }}
+                                </mat-option>
+                              </mat-select> 
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="document_drop_off" name="document_drop_off" [checked]="document_drop_off"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Document Dropp Off</mat-label>
+                          </div>
+                         <div class="col-md-3 form-group"  style="bottom: 30px;">
+                          <mat-form-field appearance="standard">
+                            <mat-label> Select </mat-label>
+                            <mat-select formControlName="document_drop_off_time" name="documentDropOffTime" [(ngModel)]="documentDropOffTime">
+                              <mat-option
+                                *ngFor="let list of allTime"
+                                [value]="list.value"
+                              >
+                                {{ list.viewValue }}
+                              </mat-option>
+                            </mat-select> 
+                          </mat-form-field>
+                         </div>
+  
+                         <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="basic_in_person" name="basic_in_person" [checked]="document_drop_off"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Basic In Person</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group"  style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-label> Select </mat-label>
+                          <mat-select formControlName="basic_in_person_time" name="basicInPersonTime" [(ngModel)]="basicInPersonTime">
+                            <mat-option
+                              *ngFor="let list of basicTime"
+                              [value]="list.value"
+                            >
+                              {{ list.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                       </div>
+  
+                        </div>
+  
+                        <div class="row form-group">
+                          <div class="col-md-3  form-group" >
+                            <mat-checkbox  matInput class="example-margin" formControlName="advance_in_person" name="advance_in_person" [checked]="document_drop_off"  
+                            style="color:#333333 !important;"></mat-checkbox>
+                            <span>&nbsp;</span><span>&nbsp;</span>        
+                            <mat-label>Advanced In Person</mat-label>
+                          </div>
+                         <div class="col-md-3 form-group" style="bottom: 30px;">
+                          <mat-form-field appearance="standard">
+                            <mat-label> Select </mat-label>
+                            <mat-select formControlName="advance_in_person_time" name="advanceInPersonTime" [(ngModel)]="advanceInPersonTime">
+                              <mat-option
+                                *ngFor="let list of advanceTime"
+                                [value]="list.value"
+                              >
+                                {{ list.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                         </div>
+  
+                         <div class="col-md-3  form-group" >
+                          <mat-checkbox  matInput class="example-margin" formControlName="return_visit" name="return_visit" [checked]="document_drop_off"  
+                          style="color:#333333 !important;"></mat-checkbox>
+                          <span>&nbsp;</span><span>&nbsp;</span>        
+                          <mat-label>Return Visit</mat-label>
+                        </div>
+                       <div class="col-md-3 form-group"  style="bottom: 30px;">
+                        <mat-form-field appearance="standard">
+                          <mat-label> Select </mat-label>
+                          <mat-select formControlName="return_visit_time" name="returnVisitTime" [(ngModel)]="returnVisitTime">
+                            <mat-option
+                              *ngFor="let list of returnTime"
+                              [value]="list.value"
+                            >
+                              {{ list.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                       </div>
+  
+                        </div>
+                        
+                        <!--Button start-->
+                        <div class="row" style="align-content: center">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-3" style="display: grid">
+                            <button
+                              type="submit"
+                              class="btn btn-primary"
+                              [disabled]="!taxEditForm.valid"
+    
+                              (click)="approveTax()"
+                            >
+                              Approve
+                            </button>
+                          </div>
+                          <div class="col-md-3" style="display: grid">
+                            <button
+                              class="btn btn-primary"
+                              mat-button
+                              (click)="back()"
+                            >
+                              Back
+                            </button>
+                          </div>
+                          <div class="col-md-3"></div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,7 @@
+.timepicker-backdrop-overlay{
+    z-index: 1000 !important;
+}
+
+.timepicker-overlay{
+    z-index: 1000 !important;
+}

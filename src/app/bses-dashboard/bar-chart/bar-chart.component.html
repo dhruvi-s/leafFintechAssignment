@@ -1,0 +1,35 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+            <button  [mat-dialog-close]="true" style="
+            float: right;background-color: transparent; border: none;">
+                <span class="material-icons" style="color: #f44336;">
+                    cancel
+                    </span>
+            </button>
+            <div class="card card-chart" style="margin-top: 50px;">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">
+                        {{barChartData.device_name}} : {{barChartData.locations}} : {{selectedMonth}}  : Total Outages : {{barChartData.total_outrages}} | Total Min Of Outages : {{barChartData.total_mins_outrages}}
+                    </h4>
+                </div>
+
+                <div style="display: block; width: 600px">
+                    <canvas id="canvas" height="100"
+                    width="100">{{ chart }}</canvas>
+                  </div>
+                  
+
+                <div class="card-footer">
+                    <!-- <div class="stats">
+                        <i class="material-icons">access_time</i> Updated {{currentTempratureDate|dateAgo}}
+                    </div> -->
+
+                </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>

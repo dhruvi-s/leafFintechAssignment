@@ -1,0 +1,328 @@
+<div>
+    <div class="container-fluid">
+        <div>
+            <!------------DATE-------------->
+            <!-- <div class="row">
+          <div class="col-md-12">
+            <button
+              mat-button
+              class="btn btn-success"
+              style="float: right; padding: 8px"
+            >
+              <i class="material-icons" style="font-size: 23px" (click)="prev()"
+                >navigate_before</i
+              >
+              <input
+                [hidden]="true"
+                matInput
+                [matDatepicker]="picker"
+                (dateInput)="addEvent('input', $event)"
+                [min]="minDate"
+                [max]="maxDate"
+                (dateChange)="addEvent('change', $event)"
+              />
+              <mat-datepicker touchUi #picker></mat-datepicker>
+  
+              <span (click)="picker.open()">
+                {{ today | date }}
+              </span>
+  
+              <i
+                class="material-icons"
+                *ngIf="this.isButtonVisible"
+                (click)="next()"
+                style="font-size: 23px"
+                >navigate_next</i
+              >
+            </button>
+          </div>
+        </div> -->
+
+            <!-------------------------------->
+            <div class="row" *ngIf="!isUpdate">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <!-- <div class="card-body">  -->
+                        <div>
+                            <div class="card-header card-header-danger" style="padding: 10px">
+                                <h4 class="card-title">Add Site</h4>
+                            </div>
+
+                            <div class="row" style="margin: 0px">
+                                <div class="col-md-12">
+                                    <form [formGroup]="siteAddForm">
+                                        <!--Row one start-->
+                                        <div class="row form-group">
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label> Site Name </mat-label>
+                                                    <input type="text" matInput name="site_name" formControlName="site_name" placeholder="Site Name" />
+                                                    <mat-error *ngIf="hasError('site_name', 'required')">Site Name is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>ZipCode</mat-label>
+                                                    <input type="text" matInput name="zip_code" formControlName="zip_code" placeholder="Zip_code" />
+                                                    <mat-error *ngIf="hasError('zip_code', 'required')">
+                                                        Zip_code is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>Address</mat-label>
+                                                    <input type="text" matInput name="address" formControlName="address" placeholder="Address" />
+                                                    <mat-error *ngIf="hasError('address', 'required')">
+                                                        Address is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label> City</mat-label>
+                                                    <input type="text" matInput name="city" formControlName="city" placeholder="City" />
+                                                    <mat-error *ngIf="hasError('city', 'required')">City Name is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>County</mat-label>
+                                                    <input type="text" matInput name="county" formControlName="county" placeholder="county" />
+                                                    <mat-error *ngIf="hasError('county', 'required')">
+                                                        County is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>State</mat-label>
+                                                    <input type="text" matInput name="state" formControlName="state" placeholder="State" />
+                                                    <mat-error *ngIf="hasError('state', 'required')">
+                                                        State is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="virtual_only" name="virtual_only" [checked]="virtual_only"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Virtual Only</mat-label>
+                                              </div> 
+
+                                              <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="advance" name="advance" [checked]="advance"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Advance</mat-label>
+                                              </div>
+
+                                               <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="military" name="military" [checked]="military"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                             
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Military</mat-label>
+                                              </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="spanish" name="spanish" [checked]="spanish"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Spanish</mat-label>
+                                              </div> 
+
+                                              <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="international" name="international" [checked]="international"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>International</mat-label>
+                                              </div>
+
+                                               <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="open_saturdays" name="open_saturdays" [checked]="open_saturdays"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Open Saturday</mat-label>
+                                              </div>
+                                        </div>
+
+
+                                      
+                                        <!--One end-->
+
+                                        <!---third row-->
+
+                                        <!--Button start-->
+                                        <div class="row" style="align-content: center">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-3" style="display: grid">
+                                                <button type="submit" class="btn btn-primary" [disabled]="!siteAddForm.valid" (click)="addSite()">
+                          Add
+                        </button>
+                                            </div>
+                                            <div class="col-md-3" style="display: grid">
+                                                <button class="btn btn-primary" mat-button (click)="back()">
+                          Back
+                        </button>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="isUpdate">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <!-- <div class="card-body">  -->
+                        <div>
+                            <div class="card-header card-header-danger" style="padding: 10px">
+                                <h4 class="card-title">Edit Site</h4>
+                            </div>
+
+                            <div class="row" style="margin: 0px">
+                                <div class="col-md-12">
+                                    <form [formGroup]="siteEditForm">
+                                        <!--Row one start-->
+                                        <div class="row form-group">
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label> Site Name </mat-label>
+                                                    <input type="text" matInput name="site_name" formControlName="site_name" placeholder="Site Name" />
+                                                    <mat-error *ngIf="hasError('site_name', 'required')">Site Name is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>ZipCode</mat-label>
+                                                    <input type="text" matInput name="zip_code" formControlName="zip_code" placeholder="Zip_code" />
+                                                    <mat-error *ngIf="hasError('zip_code', 'required')">
+                                                        Zip_code is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>Address</mat-label>
+                                                    <input type="text" matInput name="address" formControlName="address" placeholder="Address" />
+                                                    <mat-error *ngIf="hasError('address', 'required')">
+                                                        Address is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label> City</mat-label>
+                                                    <input type="text" matInput name="city" formControlName="city" placeholder="City" />
+                                                    <mat-error *ngIf="hasError('city', 'required')">City Name is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>County</mat-label>
+                                                    <input type="text" matInput name="county" formControlName="county" placeholder="county" />
+                                                    <mat-error *ngIf="hasError('county', 'required')">
+                                                        county is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                <mat-form-field appearance="standard">
+                                                    <mat-label>State</mat-label>
+                                                    <input type="text" matInput name="state" formControlName="state" placeholder="State" />
+                                                    <mat-error *ngIf="hasError('state', 'required')">
+                                                        State is required</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="virtual_only" name="virtual_only" [checked]="virtual_only"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Virtual Only</mat-label>
+                                              </div> 
+
+                                              <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="advance" name="advance" [checked]="advance"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Advance</mat-label>
+                                              </div>
+
+                                               <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="military" name="military" [checked]="military"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Military</mat-label>
+                                              </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="spanish" name="spanish" [checked]="spanish"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Spanish</mat-label>
+                                              </div> 
+
+                                              <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="international" name="international" [checked]="international"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>International</mat-label>
+                                              </div>
+
+                                               <div class="col-md-4  form-group" >
+                                                <mat-checkbox  matInput class="example-margin" formControlName="open_saturdays" name="open_saturdays" [checked]="open_saturdays=='1'"  
+                                                style="color:#333333 !important;"></mat-checkbox>
+                                                <span>&nbsp;</span><span>&nbsp;</span>        
+                                                <mat-label>Open Saturday</mat-label>
+                                              </div>
+                                        </div>
+
+                                        <!--One end-->
+
+                                        <!---third row-->
+
+                                        <!--Button start-->
+                                        <div class="row" style="align-content: center">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-3" style="display: grid">
+                                                <button type="submit" class="btn btn-primary" [disabled]="!siteEditForm.valid" (click)="updateSite()">
+                          Update
+                        </button>
+                                            </div>
+                                            <div class="col-md-3" style="display: grid">
+                                                <button class="btn btn-primary" mat-button (click)="back()">
+                          Back
+                        </button>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

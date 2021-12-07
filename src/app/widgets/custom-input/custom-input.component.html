@@ -1,0 +1,4 @@
+<mat-form-field appearance="standard" floatLabel="always">
+    <mat-label> {{ field_label }} </mat-label>
+    <input matInput [type]="type" [name]="field_name" [disabled]="disabled" [placeholder]="placeholder" [value]="value" (input)="onChange()" (blur)="onTouched()" />
+</mat-form-field>

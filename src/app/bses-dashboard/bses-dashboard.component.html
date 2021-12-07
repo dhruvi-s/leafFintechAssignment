@@ -1,0 +1,767 @@
+<div>
+  <!-- <div class="main-content"> -->
+  <div class="container-fluid">
+    <div>
+      <!------------DATE-------------->
+      <div class="row">
+        <div class="col-md-12">
+          <button mat-button class="btn btn-success" style="float: right;padding: 8px;">
+            <i class="material-icons" style="font-size: 23px" (click)="prev()">navigate_before</i>
+            <input [hidden]="true" matInput [matDatepicker]="picker" (dateInput)="addEvent('input', $event)"
+              [min]="minDate" [max]="maxDate" (dateChange)="addEvent('change', $event)" />
+            <mat-datepicker touchUi #picker></mat-datepicker>
+
+            <span (click)="picker.open()">
+              {{ today | date }}
+            </span>
+
+            <i class="material-icons" *ngIf="this.isButtonVisible" (click)="next()"
+              style="font-size: 23px">navigate_next</i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!----------CARDS-------->
+    <div class="row">
+      <div class="col-lg-12 ">
+        <div class="card">
+          <!-- <div class="card-body">  -->
+          <div>
+            <div class="card-header card-header-danger" style="padding: 10px;">
+              <h4 class="card-title">Overview</h4>
+            </div>
+
+            <div class="row" style=" margin: 0px;">
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card" style="box-shadow: 5px 5px 4px 0 rgb(0 0 0 / 14%);">
+                  <div class="card-header card-header-warning card-header-icon" style="text-align: center; margin: 0px">
+                    <div class="cardBody">
+                      <div class="trequest">
+                        <p class="cardColor">Total Locations</p>
+                     
+                        <div class="cardData"> {{bsesSummaryDataResp && bsesSummaryDataResp.locations ? bsesSummaryDataResp.locations : '00'}}
+                        </div>
+                      </div>
+                      <div class="bottomCard">
+                        <!-- (click)="openDialog('requestors',{},null)"  -->
+                        <button class="detailsButton">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" style="box-shadow: 5px 5px 4px 0 rgb(0 0 0 / 14%);">
+                  <div class="card-header card-header-warning card-header-icon" style="text-align: center; margin: 0px">
+                    <div class="cardBody">
+                      <div class="trequest">
+                        <p class="cardColor">Total No. Of Outages</p>
+                       
+                        <div class="cardData">
+                           {{bsesSummaryDataResp && bsesSummaryDataResp.total_outrages ? bsesSummaryDataResp.total_outrages : '00'}}
+                        </div>
+                      </div>
+                      <div class="bottomCard">
+                        <button class="detailsButton">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" style="box-shadow: 5px 5px 4px 0 rgb(0 0 0 / 14%);">
+                  <div class="card-header card-header-warning card-header-icon" style="text-align: center; margin: 0px">
+                    <div class="cardBody">
+                      <div class="trequest">
+                        <p class="cardColor">Total Mins Of Outages</p>
+                        
+                        <div class="cardData">
+                          {{bsesSummaryDataResp && bsesSummaryDataResp.total_min_outrages ? bsesSummaryDataResp.total_min_outrages : '00'}}
+                        </div>
+                      </div>
+                      <div class="bottomCard">
+                        <button class="detailsButton">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" style="box-shadow: 5px 5px 4px 0 rgb(0 0 0 / 14%);">
+                  <div class="card-header card-header-warning card-header-icon" style="text-align: center; margin: 0px">
+                    <div class="cardBody">
+                      <div class="trequest">
+                        <p class="cardColor">Total No. Of </p>
+                        <div class="cardData">00</div>
+                      </div>
+                      <div class="bottomCard">
+                        <button class="detailsButton">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+
+        </div>
+      </div>
+    </div>
+
+    <!----------CARDS-------->
+    <div class="row" style="margin-top: -25px;">
+      <div class="col-lg-12 ">
+        <div class="card">
+          <!-- <div class="card-body">  -->
+          <div>
+            <div class="card-header card-header-danger" style="padding: 10px;">
+              <h4 class="card-title">Today's Summary: {{today |date : "yyyy-MM-dd"}}</h4>
+            </div>
+
+            <div  *ngIf="(allDeviceOutage !== null && allDeviceOutage !== undefined )">
+              <div class="row" style="margin-left: 2px;margin-top: 8px;">
+                <div class="col-md-3">
+                  <mat-form-field class="search">
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input #in (input)="devicesByOutageataResp.queryBy({search: in.value})" type="text" matInput placeholder="Search">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="property">
+                    <mat-label>Order By</mat-label>
+                    <mat-select value="locations" (selectionChange)="devicesByOutageataResp.sortBy({property: $event.value})">
+                      <mat-option value="device_name">Device Name</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-1">
+                  <mat-button-toggle-group value="asc" (change)="devicesByOutageataResp.sortBy({order: $event.value})">
+                    <mat-button-toggle style="width: 35px;" matTooltip="Ascending" matTooltipPosition="right"
+                      value="asc">
+                      <mat-icon>arrow_upward</mat-icon>
+                    </mat-button-toggle>
+                    <mat-button-toggle matTooltip="Descending" matTooltipPosition="left">
+                      <mat-icon>arrow_downward</mat-icon>
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+          <!-- </div> -->
+          <div class="row" style=" margin-top: -25px;">
+            <div class="col-lg-12">
+              <div class="row form-group" *ngIf="allDeviceOutage !== null">
+                <div *ngFor="let list of allDeviceOutage;" [ngClass]="grid ? 'col-md-3' : 'col-md-12'">
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-chart" [style.background-color]="list.color_code!=null? list.color_code :'#808080'">
+                    <div class="container-fluid">
+                      <div class="row" style="justify-content: space-around;margin-top:10px;">
+
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <!-- <h4 style="color: black;    font-size: 16px;
+                                font-weight: 500;">Device Name</h4> -->
+                            <h4 style="color: black;    font-size: 16px;
+                                font-weight: 500;line-height: 0.4em;">{{list.device_name}}</h4>
+                            <h4 style="color: black;    font-size: 16px;
+                            font-weight: 500; line-height: 1.4em;">{{list.location}}</h4>
+
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-6">
+                          <label style="float: left;">
+                            <h4 style="color: black;font-size: 13px;    text-align: center;">Number of
+                              Power Outages</h4>
+                            <h3 style="color: black;font-size: 16px; line-height: 0.2em;
+                                text-align: center;font-weight: 500;">{{list.total_outrages}}</h3>
+
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <label style="float: right;">
+                            <h4 style="color: black;font-size: 13px;text-align: center;">Total Mins.of
+                              <br>Power Outage
+                            </h4>
+                            <h3 style="color: black;font-size: 16px;line-height: 0.2em;
+                                text-align: center; font-weight: 500;">{{list.total_mins_outrages}}</h3>
+
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 13px;
+                                ">Last Power Outage </h4>
+                                <h4 style="color: black; font-size: 16px; font-weight: 500;line-height: 0.2em;
+                                
+                                ">{{list.last_failure_time |date: "HH:mm a"}} - {{list.last_restore_time |date:" HH:mm a"}}</h4>
+                          </label>
+                        </div>
+                        <!-- <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 14px; font-weight: 400;
+                                ">{{list.last_failure_time |date: "HH:mm a"}} - {{list.last_restore_time |date:" HH:mm a"}}</h4>
+                          </label>
+                        </div> -->
+                      </div>
+
+
+
+                      <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                          <button style="border: none;background: #fff !important; color: #b1b3b6;padding: none;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'" (click)="openDialog('graph',{},list)">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              dashboard </span>
+                          </button>
+                          <button
+                            style="border: none;background: #fff !important; color: #b1b3b6;padding: none;margin-left: 4px;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'" (click)="openDialog('dashboard',{},list)">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              view_headline </span>
+                          </button>
+                        </div>
+
+
+
+                        <!-- <span class="material-icons-round">
+                              view_headline
+                              </span> -->
+
+                        <!-- <div class="col-md-12 text-center">
+                              <button class="btn" style="background: #fff;color: red;"
+                                (click)="openDialog('Graph',{},list)" mat-button><span class="material-icons">
+                                  note_add
+                                </span>Details</button>
+                            </div> -->
+                      </div>
+
+                      <div class="row" style="margin-bottom: 10px;">
+
+                      </div>
+                    </div>
+                  </div>
+                <!-- </div> -->
+
+<!-- 
+                <div class="col-md-3">
+                  <div class="card card-chart" style="background-color: #e86667;">
+                    <div class="container-fluid">
+                      <div class="row" style="justify-content: space-around;margin-top:10px;">
+
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">DEVICE 1 </h4>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">LG House </h4>
+
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-6">
+                          <label style="float: left;">
+                            <h4 style="color: black;font-size: 12px;">Number of
+                              Power Outages</h4>
+                            <h3 style="color: black;font-size: 14px; line-height: 0.4em;
+                                text-align: center;">01</h3>
+
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <label style="float: right;">
+                            <h4 style="color: black;font-size: 12px;">Total Mins.of
+                              <br>Power Outage
+                            </h4>
+                            <h3 style="color: black;font-size: 14px;line-height: 0.4em;
+                                text-align: center;">3</h3>
+
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 12px;
+                                ">Last Power Outage </h4>
+                          </label>
+                        </div>
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 14px; font-weight: 400;
+                                ">011.00am - 11.03am</h4>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                          <button style="border: none;background: #fff !important; color: #b1b3b6;padding: none;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              dashboard </span>
+                          </button>
+                          <button
+                            style="border: none;background: #fff !important; color: #b1b3b6;padding: none;margin-left: 4px;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              view_headline </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin-bottom: 10px;">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card card-chart" style="background-color: #82c568;">
+                    <div class="container-fluid">
+                      <div class="row" style="justify-content: space-around;margin-top:10px;">
+
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">DEVICE 1 </h4>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">LG House </h4>
+
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-6">
+                          <label style="float: left;">
+                            <h4 style="color: black;font-size: 12px;">Number of
+                              Power Outages</h4>
+                            <h3 style="color: black;font-size: 14px; line-height: 0.4em;
+                                text-align: center;">01</h3>
+
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <label style="float: right;">
+                            <h4 style="color: black;font-size: 12px;">Total Mins.of
+                              <br>Power Outage
+                            </h4>
+                            <h3 style="color: black;font-size: 14px;line-height: 0.4em;
+                                text-align: center;">3</h3>
+
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 12px;
+                                ">Last Power Outage </h4>
+                          </label>
+                        </div>
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 14px; font-weight: 400;
+                                ">011.00am - 11.03am</h4>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                          <button style="border: none;background: #fff !important; color: #b1b3b6;padding: none;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              dashboard </span>
+                          </button>
+                          <button
+                            style="border: none;background: #fff !important; color: #b1b3b6;padding: none;margin-left: 4px;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              view_headline </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin-bottom: 10px;">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card card-chart" style="background-color: #82c568;">
+                    <div class="container-fluid">
+                      <div class="row" style="justify-content: space-around;margin-top:10px;">
+
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">DEVICE 1 </h4>
+                            <h4 style="color: black;    font-size: 15px;
+                                font-weight: 500;">LG House </h4>
+
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-6">
+                          <label style="float: left;">
+                            <h4 style="color: black;font-size: 12px;">Number of
+                              Power Outages</h4>
+                            <h3 style="color: black;font-size: 14px; line-height: 0.4em;
+                                text-align: center;">01</h3>
+
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <label style="float: right;">
+                            <h4 style="color: black;font-size: 12px;">Total Mins.of
+                              <br>Power Outage
+                            </h4>
+                            <h3 style="color: black;font-size: 14px;line-height: 0.4em;
+                                text-align: center;">3</h3>
+
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="row" style="justify-content: space-around;">
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 12px;
+                                ">Last Power Outage </h4>
+                          </label>
+                        </div>
+                        <div class="col-md-12 col-sm-9 col-xs-9" style="text-align: center;">
+                          <label>
+                            <h4 style="color: black; font-size: 14px; font-weight: 400;
+                                ">011.00am - 11.03am</h4>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                          <button style="border: none;background: #fff !important; color: #b1b3b6;padding: none;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              dashboard </span>
+                          </button>
+                          <button
+                            style="border: none;background: #fff !important; color: #b1b3b6;padding: none;margin-left: 4px;"
+                            matTooltip="More Info" [matTooltipPosition]="'below'">
+                            <span class="material-icons" style="font-size: 15px;padding: 5px;">
+                              view_headline </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin-bottom: 10px;">
+
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row form-group" *ngIf="allDevicesDataByOutageResp == null">
+              <div class="col-md-12">
+
+             
+              <p class="noData"> No Data Found  <i class="material-icons">report_off
+              </i></p>  </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    
+
+  </div>
+
+
+  <!----table-------->
+  <div class="row" style="margin-top: -25px;">
+    <div class="col-lg-12 ">
+      <div class="card">
+        <div class="card-header card-header-danger" style="padding: 10px;">
+          <h4 class="card-title">Power Outage Details
+          <button mat-button class="btn btn-success" matTooltip="Download Report"
+						[matTooltipPosition]="'below'" (click)="results1()" style="float: right;padding: 3px 10px 2px 10px;">
+						<i class="material-icons">cloud_download</i>
+					</button>
+          </h4>
+        
+        </div>
+
+        <div >
+          <!-- <mat-spinner *ngIf="data.loading$ | async" diameter="32"></mat-spinner> -->
+
+          <div class="example-container mat-elevation-z8" style="margin-top: 20px;" *ngIf="devicesByOutageataResp !== null">
+            <table mat-table [dataSource]="devicesByOutageataResp" multiTemplateDataRows class="table table-striped">
+              <ng-container *ngFor="let column of displayedColumns">
+  
+                <ng-container *ngIf="column !== 'Status'">
+                  <ng-container [matColumnDef]="column" [sticky]="isSticky(column)">
+                    <th class="tableHeader" mat-header-cell *matHeaderCellDef style="word-wrap: none !important;">
+                      {{column}}</th>
+                    <td class="tableBody" mat-cell *matCellDef="let element" >
+                     
+                      <ng-container *ngIf="element[column] !== undefined">
+                        {{element[column]}}
+                      </ng-container>
+                      <ng-container *ngIf="element[column]== undefined">
+                        --
+                      </ng-container></td>
+                  </ng-container>
+                  
+                </ng-container>
+
+                <ng-container *ngIf="column == 'Status'">
+                  <ng-container [matColumnDef]="column" [sticky]="isSticky(column)">
+                    <th class="tableHeader" mat-header-cell *matHeaderCellDef
+                      style="word-wrap: none !important;">
+                      {{column}}
+                    </th>
+                    <td class="tableBody" mat-cell *matCellDef="let element">
+                      <span *ngIf="element[column] == 0" class="status-ok"></span>
+                      <span *ngIf="element[column] == 1" class="status-notok"></span>
+                    </td>
+                  </ng-container>
+                </ng-container>
+
+
+              
+  
+                <!-- <ng-container *ngIf="column == 'Status'">
+                  <ng-container [matColumnDef]="column" [sticky]="isSticky(column)">
+                    <th class="tableHeader" mat-header-cell *matHeaderCellDef style="word-wrap: none !important;">
+                      {{column}}
+                    </th>
+                    <td class="tableBody" mat-cell *matCellDef="let element">
+                      <span *ngIf="element[column] == 0" class="status-ok"></span>
+                      <span *ngIf="element[column] == 1" class="status-notok"></span>
+                    </td>
+                  </ng-container>
+                </ng-container>
+               -->
+  
+              </ng-container>
+  
+  
+  
+              <tr mat-header-row *matHeaderRowDef="this.displayedColumns;"></tr>
+              <!-- <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+                [class.example-expanded-row]="expandedElementWashroom === element" matTooltip="Details"
+                matTooltipPosition="below" style="cursor: pointer;" (click)="expandWashroomRow(element)"> -->
+              <!-- </tr> -->
+              <tr mat-row *matRowDef="let row; columns: displayedColumns">
+              </tr>
+
+
+  
+  
+            </table>
+            <mat-paginator *ngIf="devicesByOutageataResp.page$ | async as page" [length]="page.totalElements" [pageSize]="page.size"
+              [pageIndex]="page.number" [hidePageSize]="false" (page)="devicesByOutageataResp.fetch($event.pageIndex)"
+              style="width: 100%;">
+            </mat-paginator>
+            <!-- <table mat-table [dataSource]="devicesByOutageataResp" class="table table-striped">
+          
+            
+              <ng-container matColumnDef="sr_no" sticky>
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Sr No </th>
+                <td mat-cell *matCellDef="let element; let i = index" class="coulumnData"> {{i+1}} </td>
+              </ng-container>
+          
+            
+              <ng-container matColumnDef="date" sticky style="left: 0px;" >
+                <th mat-header-cell *matHeaderCellDef style="left: 0px;" class="tableHeader"> Date </th>
+                <td mat-cell *matCellDef="let element" style="left: 0px;" class="coulumnData"> {{element.date |date:"yyyy-MM-dd"}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="device" sticky>
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Device </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.device_name}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="location" sticky>
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Location </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.location}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="alert_log" sticky >
+                <th mat-header-cell *matHeaderCellDef class="tableHeader">Alert Log</th>
+                <td mat-cell *matCellDef="let element" class="coulumnData">{{alert_log}}
+                </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="status" sticky>
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Status </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.status}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="no_of_outages">
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> No Of Outages </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.total_outrages}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="mins_of_outage">
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Mins Of Outage </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.total_mins_outrages}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="outage1" >
+                <th mat-header-cell *matHeaderCellDef class="tableHeader">Outage1</th>
+                <td mat-cell *matCellDef="let element" class="coulumnData">{{outage1}}
+                </td>
+              </ng-container>
+             
+              <ng-container matColumnDef="outage2">
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Outage2 </th>
+                <td mat-cell *matCellDef="let element" class="coulumnData"> {{element.outage2}} </td>
+              </ng-container>
+          
+             
+              <ng-container matColumnDef="outage3" >
+                <th mat-header-cell *matHeaderCellDef class="tableHeader">Outage3</th>
+                <td mat-cell *matCellDef="let element" class="coulumnData">{{outage3}}
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+          </div>
+
+          <!-- <div class="example-container mat-elevation-z8">
+            <table
+            mat-table [dataSource]="dataSource"
+            >
+       
+              <ng-container matColumnDef="sr_no" >
+                <th mat-header-cell *matHeaderCellDef > Sr No. </th>
+                <td mat-cell *matCellDef="let element; let i = index" >
+                  {{ i + 1 }}
+                </td>              
+              </ng-container>
+          
+              <ng-container matColumnDef="date" >
+                <th mat-header-cell *matHeaderCellDef > Date </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.date}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="device" >
+                <th mat-header-cell *matHeaderCellDef > Device </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.device}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef > Location </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.location}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="alert_log" >
+                <th mat-header-cell *matHeaderCellDef > Alert Log </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.alert_log}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="status" >
+                <th mat-header-cell *matHeaderCellDef > Status </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.status}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="no_of_outages">
+                <th mat-header-cell *matHeaderCellDef > No Of Outages </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.no_of_outages}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="mins_of_outage">
+                <th mat-header-cell *matHeaderCellDef > Mins Of Outage  </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.mins_of_outage}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="outage1">
+                <th mat-header-cell *matHeaderCellDef > Outage 1  </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.outage1}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="outage2">
+                <th mat-header-cell *matHeaderCellDef > Outage 2 </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.outage2}}
+                </td> 
+              </ng-container>
+          
+              <ng-container matColumnDef="outage3" >
+                <th mat-header-cell *matHeaderCellDef > Outage 3 </th>
+                <td mat-cell *matCellDef="let element" >
+                  {{element.outage3}}
+                </td> 
+              </ng-container>
+          
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </table>
+           
+          </div> -->
+      </div>
+      
+      </div>
+    </div>
+
+  </div>
+  <!-- </div> -->
+</div>

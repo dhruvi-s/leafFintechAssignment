@@ -1,0 +1,449 @@
+.logo1 {
+    height: 65px;
+    margin-top: 10px;
+}
+body{
+	margin:0;
+	/* color:#6a6f8c; */
+	/* background:#c8c8c8; */
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	/* min-height:670px; */
+	position:relative;
+	/* background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center; */
+	/* box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19); */
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+	background:rgba(40,57,101,.9);
+}
+.card-icon {
+    background: linear-gradient(60deg, #64c8cc, #64c8cc) !important;
+}
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+.login-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#1161ee;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
+}
+.login-form .group .button{
+	background:#1161ee;
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
+}
+.login-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	transform:rotate(0);
+}
+
+.hr{
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+	text-align:center;
+}
+
+
+
+input#mat-input-0{
+    padding: 15px 20px;
+    border-radius: 25px;
+}
+
+input#mat-input-1{
+    padding: 15px 20px;
+    border-radius: 25px;
+}
+
+span.ng-tns-c155-0.ng-star-inserted {
+    color: #aaa !important; 
+    font-size: 12px !important;
+}
+
+label#mat-form-field-label-1 {
+    color: #aaa !important;
+}
+
+button.mat-focus-indicator.btn-block.mat-stroked-button.mat-button-base.mat-accent {
+    padding: 15px 20px;
+    border-radius: 25px;
+    background: #1161ee;
+    color: white;
+}
+label{
+    color: #aaa !important;
+    font-size: 12px !important;
+
+}
+
+label.tab{
+    color: #fff !important;
+    font-size: 16px !important;
+}
+body{
+    color: #fff !important;
+}
+
+input#mat-input-0 {
+    color: #000 !important;
+}
+input#mat-input-1{
+    color: #000 !important;
+}
+
+
+
+
+/* img.logoimg {
+    width: 200px !important;
+    top: 1px !important;
+    position: relative;
+    margin: 1% 30%;
+}
+
+.blue-square-container {
+    text-align: center;
+}
+
+body {
+
+    color: #000;
+    font-weight: 300;
+    height: 790px;
+    margin-top: -2%;
+    padding: 0;
+    background-image: url(https://lh3.googleusercontent.com/proxy/ouNhRfaEpwULdmJyrqkq2etqLG9r0pE4WoHyldQJQ7lp7GpRdSXSiGTssclwJVe_Lpuv7ZTizM2Qn4xP-PrAINJZQqJeI-0);
+    background-position: center;
+    background-size: cover;
+}
+
+.form-check,
+label {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #000;
+    font-weight: 400;
+}
+
+@media (min-width: 992px) {
+    .col-md-offset-4 {
+        margin-left: 33.33333333333333%;
+    }
+}
+
+.tile {
+    background-color: #ffffff;
+    border-radius: .1rem;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2), 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.app-header {
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+.login-wrapper {
+    height: 100%;
+}
+
+.positronx {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.box {
+    position: relative;
+    top: 0;
+    opacity: 1;
+    float: left;
+    padding: 60px 50px 40px 50px;
+    width: 100%;
+    background: #fff;
+ 
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+    max-width: 330px;
+}
+
+.box.back {
+    transform: scale(.95);
+    -webkit-transform: scale(.95);
+    -ms-transform: scale(.95);
+    top: -20px;
+    opacity: .8;
+    z-index: -1;
+}
+
+.box:before {
+    content: "";
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: -10px;
+    background: rgba(255, 255, 255, .6);
+    left: 0;
+    transform: scale(.95);
+    -webkit-transform: scale(.95);
+    -ms-transform: scale(.95);
+    z-index: -1;
+}
+
+.login-wrapper .example-form {
+    min-width: 100%;
+    max-width: 300px;
+    width: 100%;
+}
+
+.login-wrapper .example-full-width,
+.login-wrapper .btn-block {
+    width: 100%;
+}
+
+.login-wrapper mat-card-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+}
+
+.login-wrapper mat-card-header mat-card-title {
+    font-size: 30px;
+    margin: 0;
+}
+
+.login-wrapper .mat-card {
+    padding: 40px 70px 50px;
+}
+
+.login-wrapper .mat-stroked-button {
+    border: 1px solid currentColor;
+    line-height: 54px;
+    background: #FFF7FA;
+}
+
+.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0.8375em 0;
+} */
+
+
+/* 
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #3C4858;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+} */
+
+.field-icon {
+    float: right;
+    left: -15px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }

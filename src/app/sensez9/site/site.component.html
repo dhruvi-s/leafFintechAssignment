@@ -1,0 +1,203 @@
+<ng-template #arrow_view>
+    <mat-button-toggle-group (change)="siteData.sortBy({ order: $event.value })" class="remove-white">
+        <mat-button-toggle value="asc" matTooltip="Ascending" matTooltipPosition="right" style="width: 34px; border: 0px">
+            <mat-icon>arrow_upward</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="desc" matTooltip="Descending" matTooltipPosition="left" style="width: 34px; border: 0px">
+            <mat-icon>arrow_downward</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</ng-template>
+<div>
+    <div class="container-fluid">
+        <div>
+            <!------------DATE-------------->
+            <!-- <div class="row">
+          <div class="col-md-12">
+            <button mat-button class="btn btn-success" style="float: right;padding: 8px;">
+              <i class="material-icons" style="font-size: 23px" (click)="prev()">navigate_before</i>
+              <input [hidden]="true" matInput [matDatepicker]="picker" (dateInput)="addEvent('input', $event)"
+                [min]="minDate" [max]="maxDate" (dateChange)="addEvent('change', $event)" />
+              <mat-datepicker touchUi #picker></mat-datepicker>
+  
+              <span (click)="picker.open()">
+                {{ today | date }}
+              </span>
+  
+              <i class="material-icons" *ngIf="this.isButtonVisible" (click)="next()"
+                style="font-size: 23px">navigate_next</i>
+            </button>
+          </div>
+  
+        </div> -->
+            <!-------------------------------->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <!-- <div class="card-body">  -->
+                        <div>
+                            <div class="card-header card-header-danger" style="padding: 10px">
+                                <h4 class="card-title">
+                                    Site : {{ allSiteResp.length }}
+                                    <button mat-button class="btn btn-success" matTooltip="Download Report" [matTooltipPosition]="'below'" (click)="results()" style="float: right; padding: 3px 10px 2px 10px">
+                    <i class="material-icons">cloud_download</i>
+                  </button>
+                                </h4>
+                            </div>
+                            <!--------------table-------------------->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <mat-form-field class="search">
+                                            <mat-icon matPrefix>search</mat-icon>
+                                            <input #in (input)="siteData.queryBy({ search: in.value })" type="text" matInput placeholder="Search" />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2"></div>
+
+                                    <div class="col-md-4" style="padding: 0px 20px">
+                                        <button mat-button class="btn btn-success" style="float: right; padding: 10px" [routerLink]="['/addupdateSite']" matTooltip="Add Site" [matTooltipPosition]="'below'">
+                      <i class="material-icons" style="font-size: 23px">add</i>
+                      Add Site
+                    </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <mat-spinner *ngIf="siteData.loading$ | async" diameter="32" style="align-self: center"></mat-spinner>
+                                    <div class="example-container mat-elevation-z8" *ngIf="siteData">
+                                        <table mat-table [dataSource]="siteData" class="table table-striped">
+                                            <ng-container matColumnDef="sr_no">
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader" style="padding: 2px">
+                                                    Sr No.
+                                                </th>
+                                                <td mat-cell *matCellDef="let element; let i = index" class="tableBody" style="padding: 2px">
+                                                    {{ i + 1 }}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="site_name">
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                                                    Site Name
+                                                    <span (click)="
+                              siteData.sortBy({
+                                property: 'site_name'
+                              })
+                            ">
+                            <ng-container *ngTemplateOutlet="arrow_view">
+                            </ng-container>
+                          </span>
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="tableBody">
+                                                    {{ element.site_name }}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="zip_code">
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                                                    ZipCode
+                                                    <span (click)="
+                              siteData.sortBy({
+                                property: 'zip_code'
+                              })
+                            ">
+                            <ng-container *ngTemplateOutlet="arrow_view">
+                            </ng-container>
+                          </span>
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="tableBody">
+                                                    {{ element.zip_code }}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="address">
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                                                    Address
+                                                    <span (click)="
+                              siteData.sortBy({
+                                property: 'address'
+                              })
+                            ">
+                            <ng-container *ngTemplateOutlet="arrow_view">
+                            </ng-container>
+                          </span>
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="tableBody">
+                                                    {{ element.address }}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="created_date">
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                                                    Added On
+                                                    <span (click)="
+                              siteData.sortBy({
+                                property: 'created_date'
+                              })
+                            ">
+                            <ng-container *ngTemplateOutlet="arrow_view">
+                            </ng-container>
+                          </span>
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="tableBody">
+                                                    {{ element.created_date }}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="action" stickyEnd>
+                                                <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                                                    Action
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="action-link tableBody">
+                                                    <a (click)="updateSite(element)" matTooltip="Edit" [matTooltipPosition]="'below'">
+                                                        <span class="material-icons" style="color: darkcyan">
+                              edit
+                            </span>
+                                                    </a>
+                                                    <a data-toggle="modal" data-target="#openModal" (click)="openModal(element.site_id)" matTooltip="Delete" [matTooltipPosition]="'below'">
+                                                        <span class="material-icons" style="color: brown">
+                              delete
+                            </span>
+                                                    </a>
+                                                </td>
+                                            </ng-container>
+                                            <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                                        </table>
+
+                                        <mat-paginator *ngIf="siteData.page$ | async as page" [length]="page.totalElements" [pageSize]="page.size" [pageIndex]="page.number" [hidePageSize]="false" (page)="siteData.fetch($event.pageIndex)">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------------modal--------------------------->
+    <div id="openModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" style="display: none" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="padding: 35px">
+                <h4 style="margin: 0 auto; font-size: 18px; text-align: center">
+                    Do you want to Delete it ?
+                </h4>
+                <div style="padding: 9px"></div>
+                <div class="form-group" style="margin: 0 auto">
+                    <div style="margin-top: 25px">
+                        <button mat-raised-button type="submit" class="btn btn-success pull-center cancel-btn" data-dismiss="modal" (click)="deleteSite()">
+              Yes
+            </button>
+                        <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-danger pull-center cancel-btn">
+              No
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

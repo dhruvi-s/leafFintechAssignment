@@ -1,0 +1,64 @@
+img.logoimg {
+	width: 230px !important;
+	top: 0px !important;
+	position: absolute;
+	height: 70px;
+}
+
+.logo {
+	/* background: #3C4858 !important ; */
+	background: #fff!important;
+	padding: 0 !important;
+	color: black !important;
+}
+body > app-root > app-admin-layout > div > div.sidebar > app-sidebar > div.logo > a{
+	padding: 0 !important;
+}
+.sidebar-wrapper.ps{
+	/* background:  #3C4858 !important; */
+	background: #64c8cc !important;
+	color: #fff !important;
+}
+
+
+a.nav-link{
+	color: #fff !important;
+}
+.sidebar .logo {
+    padding: 0 !important; 
+    margin: 0;
+    display: block;
+    position: relative;
+	z-index: 4;
+	background:  #fff !important;
+}
+
+.profile-usertitle {
+	text-align: center;
+	margin-top: 20px;
+	background: #ddd;
+	border-radius: 50%;
+	padding: 1%;
+	margin: 0% 16%;
+	width: 62%;
+}
+
+.profile-usertitle-name {
+	color: #5a7391;
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+	text-transform: uppercase;
+	color: #5b9bd1;
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 15px;
+}
+
+.nav-submenu{
+	padding-left: 25px !important;
+	top: 10px !important;
+}
