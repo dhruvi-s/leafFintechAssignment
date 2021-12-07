@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AlertService } from '../_services/index';
 
 @Component({
   selector: 'app-alert',
@@ -10,10 +9,9 @@ import { AlertService } from '../_services/index';
 export class AlertComponent implements OnInit {
   message: any;
 
-  constructor(private alertService: AlertService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.alertService.getMessage().subscribe(message => { this.message = message; });
 
   }
 

@@ -1,4 +1,3 @@
-import { AddUpdateAppointmentComponent } from "./../../screens/appointment/add-update-appointment/add-update-appointment.component";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -38,18 +37,14 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { UniqueUsernameValidatorDirective } from "app/shared/unique-username-validator.directive";
 import { MatMenuModule } from "@angular/material/menu";
-import { AppointmentComponent } from "app/screens/appointment/appointment.component";
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
 import { MatRadioModule } from "@angular/material/radio";
-import { TaxScreeningMessageComponent } from "app/screens/tax-screening-message/tax-screening-message.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CustomInputModule } from "app/widgets/custom-input/custom-input.module";
 import { BlockTemplateComponent } from "app/widgets/block-template/block-template.component";
 import { BlockUIModule } from "ng-block-ui";
-import { TaxpreparerComponent } from "app/sensez9/taxpreparer/taxpreparer.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -113,11 +108,6 @@ import { TaxpreparerComponent } from "app/sensez9/taxpreparer/taxpreparer.compon
   declarations: [
     IconsComponent,
     NotificationsComponent,
-    UniqueUsernameValidatorDirective,
-    AppointmentComponent,
-    AddUpdateAppointmentComponent,
-    TaxScreeningMessageComponent,
-    TaxpreparerComponent,
     // PiechartComponent,
   ],
 })

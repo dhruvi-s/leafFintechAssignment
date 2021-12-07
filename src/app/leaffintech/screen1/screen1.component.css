@@ -2,7 +2,9 @@
     height: 65px;
     margin-top: 10px;
 }
-
+.row {
+    margin: 12px 0px 0px 0px;
+}
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -10,7 +12,8 @@ body {
   
   .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: #205BF6;
+    font-size: 15px;
   }
   
   .topnav a {
@@ -19,15 +22,16 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 15px;
   }
   
   .topnav a:hover {
-    background-color: #ddd;
+    background-color: #205BF6;
     color: black;
+    font-size: 15px;
   }
   
   .topnav a.active {
-    background-color: #04AA6D;
+    background-color: #205BF6;
     color: white;
   }
