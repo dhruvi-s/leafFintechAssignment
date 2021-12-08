@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
@@ -56,6 +56,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { CustomInputModule } from "./widgets/custom-input/custom-input.module";
 import { Screen1Component } from './leaffintech/screen1/screen1.component';
+import { DateModalComponent } from './leaffintech/date-modal/date-modal.component';
 
 @NgModule({
   imports: [
@@ -117,6 +118,7 @@ import { Screen1Component } from './leaffintech/screen1/screen1.component';
     AdminLayoutComponent,
     HomeComponent,
     Screen1Component,
+    DateModalComponent,
   ],
   providers: [
    
