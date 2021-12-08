@@ -1,53 +1,332 @@
+<!-------------Top Navbar------------------->
 <div class="topnav">
-    <a style="background-color: #2E395A33;    padding: 21px 16px;">                        
-    <img src="assets/img/Path_73.png" style="height: 35px;">
+  <a style="background-color: #2e395a33; padding: 21px 16px">
+    <img src="assets/img/Path_73.png" style="height: 35px" />
+  </a>
+  <a class="active" href="">
+    <i class="material-icons">dashboard</i><br />
+    Dashboard</a
+  >
+  <a href="">
+    <i class="material-icons">schedule</i><br />
+    MIS</a
+  >
+  <a href=""> <i class="material-icons">schedule</i><br />PMS</a>
+  <a href=""> <i class="material-icons">account_balance</i><br />LOS</a>
+  <a href="">
+    <i class="material-icons">dashboard</i><br />Awareness Calling</a
+  >
+  <a href=""> <i class="material-icons">smartphone</i><br />Users</a>
+  <a href=""> <i class="material-icons">people</i><br />Users</a>
+  <a href=""> <i class="material-icons">perm_media</i><br />Master</a>
+  <a href="">
+    <i class="material-icons">signal_cellular_alt</i><br />Report</a
+  >
 
-    </a>
-    <a class="active" href="#home">
-        <i class="material-icons">dashboard</i><br>
-        Dashboard</a>
-    <a href="#news">
-        <i class="material-icons">schedule</i><br>
-         MIS</a>
-    <a href="#contact">
-        <i class="material-icons">schedule</i><br>PMS</a>
-    <a href="#about">
-        <i class="material-icons">account_balance</i><br>LOS</a>
-    <a href="#about">
-        <i class="material-icons">dashboard</i><br>Awareness Calling</a>
-    <a href="#about">
-        <i class="material-icons">smartphone</i><br>Users</a>
-        <a href="#about">
-            <i class="material-icons">people</i><br>Users</a>
-    <a href="#about">
-        <i class="material-icons">perm_media</i><br>Master</a>
-    <a href="#about">
-        <i class="material-icons">signal_cellular_alt</i><br>Report</a>
+  <a href="" style="float: right">
+    <i class="material-icons" style="font-size: 28px">more_vert</i><br
+  /></a>
 
-        
+  <a href="" style="float: right">
+    <img src="assets/img/Ellipse 1.png" style="height: 35px" />
+    <br
+  /></a>
 
-        <a href="#about" style="float: right;">
-            <i class="material-icons"  style=" font-size: 28px">more_vert</i><br></a>
+  <a href="" style="float: right">
+    <i class="material-icons" style="font-size: 28px">notification_add</i><br
+  /></a>
+</div>
 
-            <a href="#about" style="float: right;">
-                <img src="assets/img/Ellipse 1.png" style="height: 35px;">
-                <br></a>
+<!------------------------navigation ----------------------->
+<div class="row">
+  <p style="margin-left: 22px">MIS</p>
+  <i class="material-icons">navigate_next</i>
+  <p style="color: #205bf6">Web MIS</p>
+</div>
 
-            <a href="#about" style="float: right;">
-                <i class="material-icons" style=" font-size: 28px">notification_add</i><br></a>
+<!-----------------------toggle button------------------------------>
+<div class="row">
+  <div class="col-md-12">
+    <mat-button-toggle-group
+      name="fontStyle"
+      aria-label="Font Style"
+      style="font-weight: 400; border-radius: 15px"
+    >
+      <mat-button-toggle
+        value="bold"
+        style="background-color: white; color: #205bf6"
+        >Summary</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="underline"
+        style="background-color: #205bf6; color: white"
+        >Case By Case</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </div>
+</div>
 
-  <div class="row">
-<p style="margin-left: 22px;">MIS</p>
-<i class="material-icons">navigate_next</i>
-<p style="color: #205BF6;">Web MIS</p>
-  </div>
+<!-----------------table-------------------->
+<!-- <ng-template #arrow_view>
+    <mat-button-toggle-group (change)="siteData.sortBy({ order: $event.value })" class="remove-white">
+        <mat-button-toggle value="asc" matTooltip="Ascending" matTooltipPosition="right"
+            style="width: 34px; border: 0px">
+            <mat-icon>arrow_upward</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="desc" matTooltip="Descending" matTooltipPosition="left"
+            style="width: 34px; border: 0px">
+            <mat-icon>arrow_downward</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</ng-template> -->
 
-  <div class="row">
-    <div class="col-md-12">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="font-weight: 400;border-radius: 15px;">
-            <mat-button-toggle value="bold" style="background-color: white;color: #205BF6;">Summary</mat-button-toggle>
-            <mat-button-toggle value="underline" style="background-color: #205BF6;color: white;">Case By Case</mat-button-toggle>
-          </mat-button-toggle-group>
+<ng-template #arrow_view>
+    <mat-button-toggle-group  class="remove-white">
+        <mat-button-toggle value="asc" matTooltip="Ascending" matTooltipPosition="right"
+            style="width: 26px;border: 0px;">
+            <mat-icon style="margin: auto;margin-left: -11px;
+            margin-top: 0px;">
+            filter_alt</mat-icon>
+        </mat-button-toggle>
+       
+    </mat-button-toggle-group>
+</ng-template>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div>
+        <div class="card-header" style="padding: 10px 8px 20px 10px">
+          <h4 class="card-title" style="font-weight: 500;">
+            Case By Case
+            <button
+              mat-button
+              class="btn"
+              matTooltip="Export"
+              [matTooltipPosition]="'below'"
+              style="float: right; padding: 7px 15px 8px 16px;
+                  border-radius: 10px;background: none;border: 1px solid #205bf6; color: #205bf6"
+            >
+              <i class="material-icons">file_upload</i> Export
+            </button>
+          </h4>
+
+        </div>
+        <!--------------table-------------------->
+        <div >
+                 <div>
+            <mat-spinner
+              *ngIf="dataSource.loading$ | async"
+              diameter="32"
+              style="align-self: center"
+            ></mat-spinner>
+
+            <progress  value="50" max="100">  </progress>
+
+            <div class="example-container mat-elevation-z8" >
+
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                class="table table-striped"
+              >
+                <ng-container matColumnDef="sr_no">
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="tableHeader"
+                    style="padding: 2px"
+                  >
+                    Sr No.
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let element;"
+                    class="tableBody"
+                    style="padding: 2px"
+                  >
+                    {{ element.sr_no }}
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="web_lead_id">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    Web Lead ID
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.web_lead_id }}
+                  </td>
+                </ng-container>
+
+                
+
+                <ng-container matColumnDef="customer_name">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    Customer Name
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.customer_name }}
+                   
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="city">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    City
+                    <!-- <span
+                      (click)="
+                        taxData.supportedTaxTypes.sortBy({
+                          property: 'military'
+                        })
+                      "
+                    > -->
+                      <ng-container *ngTemplateOutlet="arrow_view">
+                      </ng-container>
+                    <!-- </span> -->
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.city }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="new_lead_date">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    New Lead Date
+                    <!-- <span
+                      (click)="
+                        taxData.supportedTaxTypes.sortBy({
+                          property: 'spanish'
+                        })
+                      "
+                    > -->
+                      <ng-container *ngTemplateOutlet="arrow_view">
+                      </ng-container>
+                    <!-- </span> -->
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.new_lead_date }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="occupation">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    Occupation
+                    <!-- <span
+                      (click)="
+                        taxData.supportedTaxTypes.sortBy({
+                          property: 'international'
+                        })
+                      "
+                    > -->
+                      <ng-container *ngTemplateOutlet="arrow_view">
+                      </ng-container>
+                    <!-- </span> -->
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.occupation }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="primary_source">
+                  <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                    Primary Source
+                    <!-- <span
+                      (click)="
+                        taxData.sortBy({
+                          property: 'created_date'
+                        })
+                      "
+                    > -->
+                      <ng-container *ngTemplateOutlet="arrow_view">
+                      </ng-container>
+                    <!-- </span> -->
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tableBody">
+                    {{ element.primary_source }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="secondary_source">
+                    <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                        Secondary Source
+                      <!-- <span
+                        (click)="
+                          taxData.sortBy({
+                            property: 'created_date'
+                          })
+                        "
+                      > -->
+                        <ng-container *ngTemplateOutlet="arrow_view">
+                        </ng-container>
+                      <!-- </span> -->
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="tableBody">
+                      {{ element.secondary_source }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="tableHeader">
+                        Status
+                      <!-- <span
+                        (click)="
+                          taxData.sortBy({
+                            property: 'created_date'
+                          })
+                        "
+                      > -->
+                        <ng-container *ngTemplateOutlet="arrow_view">
+                        </ng-container>
+                      <!-- </span> -->
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="tableBody">
+                      {{ element.status }}
+                    </td>
+                  </ng-container>
+
+              
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="this.displayedColumns"
+                ></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+              <mat-paginator style-paginator
+              (page)="pageChangeEvent($event)"
+              [length]="pageLength"
+              [pageSize]="pageSize"
+              [showTotalPages]="3"
+              [pageSizeOptions]="[1,2, 5]"
+              showFirstLastButtons>
+</mat-paginator>
+<!-- <nav aria-label="...">
+    <ul class="pagination pagination-sm">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">1</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+    </ul>
+  </nav> -->
+
+              <!-- <mat-paginator
+                *ngIf="dataSource.page$ | async as page"
+                [length]="page.totalElements"
+                [pageSize]="page.size"
+                [pageIndex]="page.number"
+                [hidePageSize]="false"
+                (page)="dataSource.fetch($event.pageIndex)"
+              >
+              </mat-paginator> -->
+            </div>
+          </div>
+
+         
+        </div>
+      </div>
     </div>
   </div>
+</div>

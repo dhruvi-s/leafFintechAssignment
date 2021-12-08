@@ -24,7 +24,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppService } from "./app.service";
 import { ChartModule } from "angular-highcharts";
 
-import { AlertComponent } from "./_directives/alert.component";
 import { HomeComponent } from "./home/home.component";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
@@ -116,7 +115,6 @@ import { Screen1Component } from './leaffintech/screen1/screen1.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AlertComponent,
     HomeComponent,
     Screen1Component,
   ],
